@@ -78,19 +78,28 @@ def getAllHousesUnderPolygon():
         x4 = column[7]
         y4 = column[8]
 
-        p = Point(float(x1), float(y1))
+        p1 = Point(float(x1), float(y1))
+        p2 = Point(float(x2), float(y2))
+        p3 = Point(float(x3), float(y3))
+        p4 = Point(float(x4), float(y4))
+
+
 
         # We will check whether a given point is within polygon coordinates,
         # If yes than we will add the house id inside the list
-        
-        if (isPointWithinPolygon(poly, p) == True):
+
+        if (isPointWithinPolygon(poly, p1, p2, p3, p4) == True):
             outputlist.insert(column[0])
 
     http_response = make_response(jsonify(outputlist))
     return http_response
 
-def isPointWithinPolygon(polygon, point):
-    point.within(polygon)
+def isPointWithinPolygon(polygon, point1, point2, point3, point4):
+    if(point1.within(polygon) == True):
+        if(point2.within(polygon) == True):
+            if (point3.within(polygon) == True):
+                if (point4.within(polygon) == True):
+                    return True
 
 
 # =====================================================
